@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+        <div class="form-group">
+            <p class="mb-0">A share of <strong>{{name}}</strong> <em>({{symbol}})</em> costs <strong>{{price | usd}}</strong></p>
+        </div>
+{% endblock %}
+

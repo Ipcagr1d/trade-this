@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% with message = get_flashed_messages() %}
+{% if messages %}
+<header class="alert alert-primary border text_center" role="alert">
+    {{ message }}
+</header>
+{% endif %}
+{% endwith %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Name</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+            <tbody>
+                {% for stock in user_stocks %}
+                <tr>
+                    <td>
+                        {{ stock.symbol }}
+                    </td>
+                    <td>
+                        {{ stock.name }}
+                    </td>
+                    <td>
+                        {{ stock.shares }}
+                    </td>
+                    <td>
+                        {{ stock.price | usd }}
+                    </td>
+                    <td>
+                        {{ stock.total | usd }}
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4">
+                        CASH
+                    </td>
+                    <td>
+                        {{ user_cash.cash | usd }}
+                    </td>
+                </tr>
+                <tfoot>
+                    <td colspan="4"></td>
+                    <td><strong>{{ total_portfolio | usd }}</strong></td>
+                </tfoot>
+            </tbody>
+    </table>
+{% endblock %}
