@@ -2,7 +2,7 @@ import os
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
-from flask_session import Session
+from flask_session.__init__ import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -75,57 +75,57 @@ def index():
     return render_template("index.html", user_stocks=user_stocks, user_cash=user_cash[0], total_portfolio=total_portfolio)
 
 
-@app.route("/account", methods=["GET", "POST"])
-@login_required
-def account():
-    """Change account password"""
+# @app.route("/account", methods=["GET", "POST"])
+# @login_required
+# def account():
+#     """Change account password"""
 
-    # Personal touch adding a way to change your account password
+#     # Personal touch adding a way to change your account password
 
-    if request.method == "POST":
+#     if request.method == "POST":
 
-        # Variable assigment for easy usage
-        current_password = request.form.get("current_password")
-        password = request.form.get("new_password")
-        confirmation = request.form.get("confirmation")
+#         # Variable assigment for easy usage
+#         current_password = request.form.get("current_password")
+#         password = request.form.get("new_password")
+#         confirmation = request.form.get("confirmation")
 
-        # Form check ensure all required forms are filled
-        if not current_password:
-            return apology("Please enter your current password")
+#         # Form check ensure all required forms are filled
+#         if not current_password:
+#             return apology("Please enter your current password")
 
-        elif not new_password:
-            return apology("Enter your new password")
+#         elif not new_password:
+#             return apology("Enter your new password")
 
-        # Fetch user data
-        rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
+#         # Fetch user data
+#         rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
 
-        # Password check
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("current_password")):
-            return apology("invalid password", 403)
+#         # Password check
+#         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("current_password")):
+#             return apology("invalid password", 403)
 
-         # Personal touch password validator
-        elif validate(password) != 1:
-            return apology("Password is weak, 8 characters with digits, uppercase and lowercase required")
+#          # Personal touch password validator
+#         elif validate(password) != 1:
+#             return apology("Password is weak, 8 characters with digits, uppercase and lowercase required")
 
-        elif not confirmation:
-            return apology("New password do not match")
+#         elif not confirmation:
+#             return apology("New password do not match")
 
-        elif password != confirmation:
-            return apology("New passwword do not match")
+#         elif password != confirmation:
+#             return apology("New passwword do not match")
 
-        # Hash the new password
-        else:
+#         # Hash the new password
+#         else:
 
-            hash = generate_password_hash(
-                password, method="pbkdf2:sha256", salt_length=8)
+#             hash = generate_password_hash(
+#                 password, method="pbkdf2:sha256", salt_length=8)
 
-            db.execute("UPDATE users SET hash = ? WHERE id = ?", hash, session["user_id"])
+#             db.execute("UPDATE users SET hash = ? WHERE id = ?", hash, session["user_id"])
 
-            flash("Success!")
-            return render_template("account.html")
+#             flash("Success!")
+#             return render_template("account.html")
 
-    else:
-        return render_template(account.html)
+#     else:
+#         return render_template(account.html)
 
 
 @app.route("/buy", methods=["GET", "POST"])
