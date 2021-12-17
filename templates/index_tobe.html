@@ -50,18 +50,56 @@
         </nav>
 
         <main class="container p-5">
-            <div class="quote-form">
-                <form action="/quote" method="post">
-                    <div class="form-group">
-                        <input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Symbol" type="text">
-                    </div>
-                    <button class="btn btn-primary" type="submit">Quote</button>
-                </form>
-            </div>  
+            <div class="index-table">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Symbol</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Shares</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            {% for stock in user_stocks %}
+                            <tr>
+                                <td>
+                                    {{ stock.symbol }}
+                                </td>
+                                <td>
+                                    {{ stock.name }}
+                                </td>
+                                <td>
+                                    {{ stock.shares }}
+                                </td>
+                                <td>
+                                    {{ stock.price | usd }}
+                                </td>
+                                <td>
+                                    {{ stock.total | usd }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="4">
+                                    CASH
+                                </td>
+                                <td>
+                                    {{ user_cash.cash | usd }}
+                                </td>
+                            </tr>
+                            <tfoot>
+                                <td colspan="4"></td>
+                                <td><strong>{{ total_portfolio | usd }}</strong></td>
+                            </tfoot>
+                        </tbody>
+                </table>
+            </div>
         </main>
     
-<!-- Footer -->
-<footer class="text-center text-lg-start bg-light text-muted">
+ <!-- Footer -->
+ <footer class="text-center text-lg-start bg-light text-muted">
         
     <!-- Section: Links  -->
     <section class="">
@@ -98,3 +136,4 @@
 <!-- Footer -->
 </body>
 </html>
+
