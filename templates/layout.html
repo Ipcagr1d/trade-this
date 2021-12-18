@@ -1,71 +1,195 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <head>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=1, width=device-width">
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#7952b3">
 
-        <!-- http://getbootstrap.com/docs/4.5/ -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-        <!-- https://favicon.io/emoji-favicons/money-mouth-face/ -->
-        <link href="/static/favicon.ico" rel="icon">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
-        <link href="/static/styles.css" rel="stylesheet">
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
 
-        <!-- http://getbootstrap.com/docs/4.5/ -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    
+    <!-- Custom styles for this template -->
+    <link href="/static/index-style.css" rel="stylesheet">
 
-        <title>Trade This!: {% block title %}{% endblock %}</title>
-
-    </head>
-
-    <body>
-
-        <nav class="navbar navbar-expand-md navbar-light bg-light border">
-            <a class="navbar-brand" href="/">TradeThis!</a>
-            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar">
-                {% if session.user_id %}
-                    <ul class="navbar-nav mr-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/quote">Quote</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/buy">Buy</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/sell">Sell</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/history">History</a></li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
-                    </ul>
-                {% else %}
-                    <ul class="navbar-nav ml-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
-                    </ul>
-                {% endif %}
-            </div>
+    <title>Trade This: Home</title>
+  </head>
+  <body class="bg-light" id="index-body" >
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img src="/static/1x/Artboard 4.png">Trade This!</a>
+          <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Account</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Quote</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Log out</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Transaction</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                  <li><a class="dropdown-item" href="#">Buy</a></li>
+                  <li><a class="dropdown-item" href="#">Sell</a></li>
+                  <li><a class="dropdown-item" href="#">History</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="nav-scroller bg-body shadow-sm">
+        <nav class="nav nav-underline" aria-label="Secondary navigation">
+          <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+          <a class="nav-link disabled" href="#">Account</a>
+          <a class="nav-link" href="#">Quote</a>
+          <a class="nav-link" href="#">Buy</a>
+          <a class="nav-link" href="#">Sell</a>
+          <a class="nav-link" href="#">History</a>
+          <a class="nav-link" href="#">Log out</a>
         </nav>
-
-        {% if get_flashed_messages() %}
-            <header>
-                <div class="alert alert-primary border text-center" role="alert">
-                    {{ get_flashed_messages() | join(" ") }}
-                </div>
-            </header>
-        {% endif %}
-
-        <main class="container p-5">
-            {% block main %}{% endblock %}
-        </main>
-
-        <footer class="small text-center text-muted">
-            Data provided for free by <a href="https://iextrading.com/developer">IEX</a>. View <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>.
-        </footer>
-
+      </div>
+      
+      <main class="container">
+        <div class="acrylic d-flex align-items-center p-3 my-3 text-white rounded shadow-sm">
+          <img class="me-3" src="/static/1x/Artboard 7.png" alt="" width="48" height="38">
+          <div class="lh-1">
+            <h1 class="h6 mb-0 text-dark lh-1">Welcome back</h1>
+            <small class="text-dark">You are set, now do whatever you see fit!</small>
+          </div>
+        </div>
+      
+        <div class="my-3 p-3 rounded shadow-sm acrylic">
+          <h6 class="border-bottom pb-2 mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightning" viewBox="0 0 16 16">
+            <path d="M5.52.359A.5.5 0 0 1 6 0h4a.5.5 0 0 1 .474.658L8.694 6H12.5a.5.5 0 0 1 .395.807l-7 9a.5.5 0 0 1-.873-.454L6.823 9.5H3.5a.5.5 0 0 1-.48-.641l2.5-8.5zM6.374 1 4.168 8.5H7.5a.5.5 0 0 1 .478.647L6.78 13.04 11.478 7H8a.5.5 0 0 1-.474-.658L9.306 1H6.374z"/>
+          </svg>Quick Access</h6>
+          <div class="d-flex text-muted pt-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+              </svg>
+           
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+              <strong class="d-block text-gray-dark">Buy</strong>
+              You are optimistic, imagining your money started to grow or will it? either way we are here to make money
+              <input class="d-block my-2 btn btn-success" type="button" value="Buy">
+            </p>
+          </div>
+          <div class="d-flex text-muted pt-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
+                <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
+              </svg>
+      
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+              <strong class="d-block text-gray-dark">Sell</strong>
+              Things went well and you are satisfied, or perhaps things started to get ugly and you want get out as quickly as possible.
+              <input class="my-2 d-block btn btn-danger" type="button" value="Sell">
+            </p>
+          </div>
+          <div class="d-flex text-muted pt-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"/>
+                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+              </svg>
+      
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+              <strong class="d-block text-gray-dark">History</strong>
+              Well what's worse forgetting where you put your money, or something fishy is going on, keep track what's going on.
+              <input class="my-2 d-block btn btn-primary" type="button" value="History">
+            </p>
+          </div>
+        </div>
+      
+        <div class="acrylic my-3 p-3 bg-body rounded shadow-sm">
+            <table class="table table-borderless table-responsive">
+                <thead>
+                    <tr>
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Shares</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                stock.symbol
+                            </td>
+                            <td>
+                                stock.name
+                            </td>
+                            <td>
+                                stock.shares
+                            </td>
+                            <td>
+                                stock.price | usd
+                            </td>
+                            <td>
+                                stock.total | usd
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                CASH
+                            </td>
+                            <td>
+                                user_cash.cash | usd
+                            </td>
+                        </tr>
+                        <tfoot>
+                            <td colspan="4"></td>
+                            <td><strong>total_portfolio | usd</strong></td>
+                        </tfoot>
+                    </tbody>
+            </table>
+        </div>
+      </main>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <script src="/static/offcanvas.js"></script>
+    
     </body>
-
 </html>
+<!-- Option 1: Bootstrap Bundle with Popper
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
