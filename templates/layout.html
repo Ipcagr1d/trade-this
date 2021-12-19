@@ -38,6 +38,8 @@
     <!-- Custom styles for this template -->
     <link href="/static/index-style.css" rel="stylesheet">
 
+    <link href="/static/favicon.ico" rel="icon">
+
     <title>Trade This: {% block title %}{% endblock %}</title>
   </head>
   <body class="bg-light" id="index-body" >
@@ -86,6 +88,14 @@
           <a class="nav-link" href="/logout">Log out</a>
         </nav>
       </div>
+
+      {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-primary border text-center" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+      {% endif %}
       
       <main class="container">
         {% block main %}{% endblock %}

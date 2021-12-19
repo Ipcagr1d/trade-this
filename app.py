@@ -133,6 +133,9 @@ def index():
 def buy():
     """Buy shares of stock"""
 
+    # Initialize error handler
+    errormessage = " "
+
     # POST request
     if request.method == "POST":
 
@@ -142,7 +145,8 @@ def buy():
 
         # Must fill symbol
         if not request.form.get("symbol") or lookup(request.form.get("symbol"))is None:
-            return apology("Symbol is not valid")
+            errormessage = "Symbol is not valid"
+            return render_template("buy.html", errormessage = errormessage)
 
         symbol = request.form.get("symbol")
         price = lookup(symbol)
@@ -151,18 +155,21 @@ def buy():
         try:
             shares = int(shares)
             if shares < 1:
-                return apology("You must enter a positive integer")
+                errormessage = "You must enter a positive integer"
+                return render_template("buy.html", errormessage = errormessage)
 
         # Ensure integer is always entered
         except ValueError:
-            return apology("You must enter a positive integer")
+            errormessage = "You must enter a postive integer"
+            return render_template("buy.html", errormessage = errormessage)
 
         # Shares price is number of shares times price per share
         shares_price = shares * price["price"]
 
         # Check if user cash is enough if enough proceed
         if user_cash < (shares_price):
-            return apology("Not enough funds")
+            errormessage = "Not enough funds"
+            return render_template("buy.html", errormessage = errormessage)
 
         else:
             db.execute("UPDATE users SET cash = cash - ? WHERE id = ?", shares_price, session["user_id"],)
@@ -194,23 +201,28 @@ def login():
     # Forget any user_id
     session.clear()
 
+    # Initialize error-handler
+    errormessage=" "
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 403)
+            errormessage = "Please enter your username"
+            return render_template("login.html", errormessage = errormessage)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 403)
+            errormessage = "Please enter your password"
+            return render_template("login.html", errormessage = errormessage)
 
         # Query database for username
         rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return apology("invalid username and/or password", 403)
+            errormessage = "Invalid username and/or password"
+            return render_template("login.html", errormessage = errormessage)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
@@ -239,13 +251,17 @@ def logout():
 def quote():
     """Get stock quote."""
 
+    # Initialize error handling
+    errormessage = " "
+
     # Do a post request to look for symbol in lookup then display
     if request.method == "POST":
         quote = lookup(request.form.get("symbol"))
 
         # Symbol must be filled
         if quote is None or not request.form.get("symbol"):
-            return apology("Symbol ot found")
+            errormessage = "Symbol not found"
+            return render_template("quote.html", errormessage = errormessage)
 
         else:
             return render_template(
@@ -263,6 +279,9 @@ def quote():
 def register():
     """Register user"""
 
+    # Error handler initialization
+    errormessage = " "
+
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
@@ -272,27 +291,33 @@ def register():
 
         # Username must be filled
         if not username:
-            return apology("Username is missing")
+            errormessage = "Username is missing"
+            return render_template("register.html", errormessage = errormessage)
 
         # Username must not exist
         elif len(rows) >= 1:
-            return apology("Username already exist")
+            errormessage = "Username already exist"
+            return render_template("register.html", errormessage = errormessage)
 
         # Password must be filled
         elif not password:
-            return apology("Password is missing")
+            errormessage = "Password is missing"
+            return render_template("register.html", errormessage = errormessage)
 
         # Password confirmation must be filled
         elif not confirmation:
-            return apology("Please confirm your password")
+            errormessage = "Please confirm your password"
+            return render_template("register.html", errormessage = errormessage)
 
         # Personal touch password validator
         elif validate(password) != 1:
-            return apology("Password is weak, 8 characters with digits, uppercase and lowercase required")
+            errormessage = "Password is weak, 8 characters with digits, uppercase, and lowercase is required"
+            return render_template("register.html",errormessage = errormessage)
 
         # Password confirmation must match password
         elif not password == confirmation:
-            return apology("Password do not match")
+            errormessage = "Password do not match"
+            return render_template("register.html", errormessage = errormessage)
 
         else:
             # Generate password hash
@@ -302,7 +327,7 @@ def register():
             db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, hash)
 
             # Redirect to index
-            # Imitate alert from staff website
+            # Alert
             flash("Registrasion Success!")
             return redirect("/")
 
@@ -316,6 +341,9 @@ def register():
 def sell():
     """Sell shares of stock"""
 
+    # Initialize error handler
+    errormessage = " "
+
     if request.method == "POST":
 
         symbol = request.form.get("symbol")
@@ -324,17 +352,20 @@ def sell():
         # Ensure prequisites are correctly set
         # Making sure shares value is a postive integer
         if positive_only(shares) == 0:
-            return apology("Please enter a positive integer")
+            errormessage = "Please enter a positive integer"
+            return render_template("sell.html", errormessage = errormessage)
 
         if not symbol:
-            return apology("Symbol is missing")
+            errormessage = "Symbol is missing"
+            return render_template("sell.html", errormessage = errormessage)
 
         # Execute database to check for stocks
         stocks = db.execute("SELECT SUM(shares) as shares FROM user_stocks WHERE user_id = ? AND symbol = ?;",session["user_id"],symbol,)[0]
 
         # Make sure shares does not exceed what user have
         if shares > stocks["shares"]:
-            return apology("Your account don't have this number of shares")
+            errormessage = "You don't have that much shares"
+            return render_template("sell.html", errormessage = errormessage)
         price = lookup(symbol)["price"]
         shares_value = price * shares
 

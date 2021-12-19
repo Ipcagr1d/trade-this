@@ -13,6 +13,9 @@
   </div>
   <div class="form-signin">
     <form action="/buy" method="post">
+      <div class="d-flex justify-content-center text-danger">
+        <em><strong>{{errormessage}}</strong></em>
+      </div>
       <div class="form-floating">
         <input type="text" class="form-control" id="floatingInput" placeholder="TSLA" name="symbol" autocomplete="off" autofocus>
         <label for="floatingInput">Symbol</label>

@@ -9,6 +9,9 @@
     <form action="/login" method="post">
       <h1 class="h3 mb-3 fw-normal">Please Log in</h1>
       <p class="lead">Log in to continue. if you don't have an account please go to the register page to make yourself an account, no email is required.</p>
+      <div class="d-flex justify-content-center text-danger">
+        <em><strong>{{errormessage}}</strong></em>
+      </div>
       <div class="form-floating">
         <input type="text" class="form-control w-100" id="floatingInput" placeholder="Johndoe" autocomplete="off" autofocus name="username">
         <label for="floatingInput" class="text-dark">Username</label>

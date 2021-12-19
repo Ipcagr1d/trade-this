@@ -13,6 +13,9 @@
   </div>
   <div class="form-signin">
     <form action="/sell" method="post">
+      <div class="d-flex justify-content-center text-danger">
+        <em><strong>{{errormessage}}</strong></em>
+      </div>
           <div class="dropdown text-center">
             <select name="symbol" class="form-control">
               <option disable selected value>
