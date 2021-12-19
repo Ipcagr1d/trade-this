@@ -62,7 +62,7 @@ main img
   z-index: 2;
 }
 
-.form-signin input[type="username"] {
+.form-signin input[type="text"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -76,10 +76,12 @@ main img
   border-bottom-left-radius: 0;
 }
 
-.form-signin input[type="password-again"] {
-  margin-bottom: 10px;
+#floatingPassword {
+  margin-bottom: -2px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .form-signin input[type="password-login"] {

@@ -351,6 +351,11 @@ def sell():
         stocks = db.execute("SELECT symbol FROM user_stocks WHERE user_id = ? GROUP BY symbol",session["user_id"],)
         return render_template("sell.html", stocks=stocks)
 
+@app.route("/about", methods=["GET", "POST"])
+def about():
+    """render about page"""
+    return render_template("about.html")
+
 
 def errorhandler(e):
     """Handle error"""
