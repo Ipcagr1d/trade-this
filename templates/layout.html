@@ -46,7 +46,10 @@
 
     <title>Trade This: {% block title %}{% endblock %}</title>
   </head>
-  <body class="bg-light" id="index-body" >
+  <body class="bg-light" id="index-body">
+    <div id="loading">
+      <img id="loading-image" src="/static/Infinity-1s-200px.gif" alt="Loading..." />
+    </div>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
         <div class="container-fluid">
           <a class="navbar-brand" href="#"><img src="/static/1x/Artboard 4.png">Trade This!</a>
@@ -108,6 +111,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
     <script src="/static/offcanvas.js"></script>
+
+    <script>
+      $(window).on('load', function () {
+        $('#loading').hide();
+      }) 
+    </script>
     
     </body>
 </html>

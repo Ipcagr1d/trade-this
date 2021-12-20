@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}
-  <div class="acrylic p-5 mb-4 rounded-3 text-center">
+  <div class="acrylic shadow p-5 mb-4 rounded-3 text-center">
     <div class="container-fluid py-5">
       <h1 class="display-5 fw-bold">Buy</h1>
       <p class="fs-4 text-center">Know the symbol for the stock first, use quote to verify the symbol and current price. Symbol selector is not yet available sadly, but don't worry I'll add it someday...</p>
@@ -21,8 +21,8 @@
         <label for="floatingInput">Symbol</label>
       </div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="TSLA" name="shares">
-        <label for="floatingInput">Shares</label>
+        <input type="text" class="form-control" id="floatingInputSecond" placeholder="TSLA" name="shares">
+        <label for="floatingInputSecond">Shares</label>
       </div>
       <button class="btn btn-lg btn-secondary fw-bold bg-dark text-white w-100" id="buy-button" type="submit">Buy</button>
     </form>

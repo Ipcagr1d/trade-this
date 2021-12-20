@@ -173,6 +173,14 @@ body {
     border-top-left-radius: 0;
   }
 
+  #floatingInputSecond {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+
   #quote-button {
       margin-bottom: -10px;
       border-top-right-radius: 0;
@@ -218,4 +226,22 @@ body {
     outline: 0;
   }
   
-  
+/* Spinner */
+
+#loading {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.7;
+  background-color: #fff;
+  z-index: 99;
+}
+
+#loading-image {
+  z-index: 100;
+}
