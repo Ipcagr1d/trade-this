@@ -40,20 +40,24 @@
 
     <link href="/static/favicon.ico" rel="icon">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
     <title>Trade This: {% block title %}{% endblock %}</title>
   </head>
   <body class="bg-light" id="index-body" >
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
         <div class="container-fluid">
           <a class="navbar-brand" href="#"><img src="/static/1x/Artboard 4.png">Trade This!</a>
-          <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+          <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
       
           <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Dashboard</a>
+                <a class="nav-link" aria-current="page" href="/">Dashboard</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled" href="#">Account</a>
