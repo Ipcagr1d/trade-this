@@ -54,6 +54,8 @@ if not os.environ.get("API_KEY"):
 def index():
     """Show portfolio of stocks"""
 
+    user_name = session["user_name"]
+
     # Display user initial cash
     user_cash = db.execute(
         "SELECT cash FROM users WHERE id = ?",
@@ -79,7 +81,7 @@ def index():
     # Calculate portfolio value from any assets (Cash and stocks)
     total_portfolio = total_stocks + user_cash[0]["cash"]
 
-    return render_template("index.html", user_stocks=user_stocks, user_cash=user_cash[0], total_portfolio=total_portfolio)
+    return render_template("index.html", user_stocks=user_stocks, user_cash=user_cash[0], total_portfolio=total_portfolio, user_name = user_name)
 
 
 # @app.route("/account", methods=["GET", "POST"])
@@ -233,6 +235,7 @@ def login():
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
+        session["user_name"] = rows[0]["username"]
 
         # Redirect user to home page
         return redirect("/")
