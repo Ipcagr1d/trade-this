@@ -5,22 +5,25 @@
 {% endblock %}
 
 {% block main %}
-  <div class="acrylic shadow p-5 mb-4 rounded-3 text-center">
-    <div class="container-fluid py-5">
-      <h1 class="display-5 fw-bold">Quote</h1>
-      <p class="fs-4 text-center">A quote is the last price at which an asset traded; it is the most recent price that a buyer and seller agreed upon and at which some amount of the asset was transacted. ... The ask quote shows what a current participant is willing to sell the shares for. A quote is also referred to as an asset's "quoted price."</p>
+<div id="loading"></div>
+  <div id="content">
+    <div class="acrylic shadow p-5 mb-4 rounded-3 text-center">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Quote</h1>
+        <p class="fs-4 text-center">A quote is the last price at which an asset traded; it is the most recent price that a buyer and seller agreed upon and at which some amount of the asset was transacted. ... The ask quote shows what a current participant is willing to sell the shares for. A quote is also referred to as an asset's "quoted price."</p>
+      </div>
     </div>
-  </div>
-  <div class="form-signin">
-    <form action="/quote" method="post">
-      <div class="d-flex justify-content-center text-danger">
-        <em><strong>{{errormessage}}</strong></em>
-      </div>
-      <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="TSLA" name="symbol" autocomplete="off" autofocus>
-        <label for="floatingInput">Symbol</label>
-      </div>
-      <button class="btn btn-lg btn-secondary fw-bold bg-dark text-white w-100" id="quote-button" type="submit">Quote</button>
-    </form>
+    <div class="form-signin">
+      <form action="/quote" method="post">
+        <div class="d-flex justify-content-center text-danger">
+          <em><strong>{{errormessage}}</strong></em>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput" placeholder="TSLA" name="symbol" autocomplete="off" autofocus>
+          <label for="floatingInput">Symbol</label>
+        </div>
+        <button class="btn btn-lg btn-secondary fw-bold bg-dark text-white w-100" id="quote-button" type="submit" onclick="loading();">Quote</button>
+      </form>
+    </div>
   </div>
 {% endblock %}

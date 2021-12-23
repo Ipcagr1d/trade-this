@@ -4,6 +4,9 @@
     Dashboard
 {% endblock %}
 
+{% block headscript %}
+{% endblock %}
+
 {% block main %}
   <div class="acrylic shadow d-flex align-items-center p-3 my-3 text-white rounded shadow-sm">
     <img class="me-3" src="/static/favicon/favico-gradient-06.svg" alt="" width="48" height="48">
@@ -71,7 +74,7 @@
   </div>
 
   <div class="acrylic my-3 p-3 bg-body rounded shadow">
-      <table class="table table-borderless table-responsive">
+      <table id="data" class="table table-responsive display">
         <thead>
           <tr>
               <th scope="col">Symbol</th>
@@ -80,7 +83,7 @@
               <th scope="col">Price</th>
               <th scope="col">Total</th>
           </tr>
-      </thead>
+        </thead>
           <tbody>
               {% for stock in user_stocks %}
               <tr>
@@ -116,4 +119,7 @@
           </tbody>
       </table>
   </div>
+{% endblock %}
+
+{% block script %}
 {% endblock %}
