@@ -264,6 +264,11 @@ def quote():
     # Initialize error handling
     errormessage = " "
 
+    # Get companies dataset
+    companies = db.execute(
+        "SELECT * FROM sp500comp"
+    )
+
     # Do a post request to look for symbol in lookup then display
     if request.method == "POST":
         quote = lookup(request.form.get("symbol"))
@@ -282,7 +287,7 @@ def quote():
 
     # Render quote template when clicking via GET (link or redirect)
     else:
-        return render_template("quote.html")
+        return render_template("quote.html", companies=companies)
         
 
 @app.route("/register", methods=["GET", "POST"])
