@@ -1,5 +1,6 @@
 import os
 
+
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
@@ -37,17 +38,8 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///tradethis.db")
 
-# Make sure API key is set
-if not os.environ.get("API_KEY"):
-    raise RuntimeError("API_KEY not set")
-
-# # Make sure API key is set
-# if not os.environ.get("API_KEY"):
-# #set iur api ke for the stock quote engine
-#     try:
-#         os.environ["API_KEY"] = "pk_55396df1894c4e10a34a4fd8f682c227" 
-#     except:
-#         raise RuntimeError("API_KEY not set")
+# Enviroment secret variable assignee
+API_KEY = os.environ.get('API_KEY')
 
 @app.route("/")
 @login_required
