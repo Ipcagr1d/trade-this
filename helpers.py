@@ -32,7 +32,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
-            return redirect("/login")
+            return redirect("/welcome")
         return f(*args, **kwargs)
     return decorated_function
 
@@ -65,7 +65,7 @@ def usd(value):
     """Format value as USD."""
     return f"${value:,.2f}"
 
-# Adding personal touch password strength check using regex import re
+# Password compliance checker
 
 
 def validate(password):
@@ -92,6 +92,7 @@ def validate(password):
         return password_ok
 
 
+# Enforce positive value only
 def positive_only(shares):
     valid = 1
 

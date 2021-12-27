@@ -394,6 +394,11 @@ def about():
     """render about page"""
     return render_template("about.html")
 
+@app.route("/welcome", methods=["GET", "POST"])
+def welcome():
+    """Render welcome page only"""
+    return render_template("welcome.html")
+
 
 def errorhandler(e):
     """Handle error"""
