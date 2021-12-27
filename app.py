@@ -123,10 +123,10 @@ def account():
             db.execute("UPDATE users SET hash = ? WHERE id = ?", hash, session["user_id"])
 
             flash("Success!")
-            return render_template("account.html")
+            return render_template("index.html")
 
     else:
-        return render_template(account.html)
+        return render_template("account.html")
 
 
 @app.route("/buy", methods=["GET", "POST"])
