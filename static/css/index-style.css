@@ -56,7 +56,7 @@ body {
 }
 
 .nav-underline .nav-link:hover {
-  color: #007bff;
+  color: #000;
 }
 
 .nav-underline .active {
