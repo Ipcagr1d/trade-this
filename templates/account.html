@@ -5,9 +5,30 @@
 {% endblock %}
 
 {% block main %}
-  <div class="acrylic shadow p-5 rounded-3 my-5 text-center">
-    <div class="container-fluid py-5">
-      <h1>This page is under construction.</h1>
+<div class="acrylic shadow p-3 px-5 mb-4 rounded-3 text-center my-3 mw-25">
+  <div class="container-fluid py-3 justify-content-center text-center">
+    <h1 class="my-3">Edit your account</h1>
+    <form action="/account" method="post" class="row g-3">
+      <div class="col-md-6">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="account-username" name="username" autocomplete="off">
+      </div>
+      <div class="col-md-6">
+        <label for="password" class="form-label">Current Password</label>
+        <input type="password" class="form-control" id="account-password" name="current_password">
+      </div>
+      <div class="col-12">
+        <label for="newpassword" class="form-label">New Password</label>
+        <input type="password" class="form-control" id="account-newpassword" name="new_password">
+      </div>
+      <div class="col-12">
+        <label for="confirmation" class="form-label">Confirm New Password</label>
+        <input type="password" class="form-control" id="confirmation" name="confirmation">
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-dark">Confirm</button>
+      </div>
+    </form>
     </div>
   </div>
 {% endblock %}

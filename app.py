@@ -81,6 +81,9 @@ def index():
 def account():
     """Change account password"""
 
+    # Handle error
+    errormessage = " "
+
     # Personal touch adding a way to change your account password
 
     if request.method == "POST":
@@ -92,27 +95,37 @@ def account():
 
         # Form check ensure all required forms are filled
         if not current_password:
-            return apology("Please enter your current password")
+            errormessage = "You haven't enter you password"
+            return render_template("account.html", errormessage=errormessage)
 
         elif not new_password:
-            return apology("Enter your new password")
+            errormessage = "You haven't set your new password"
+            return render_template("account.html", errormessage=errormessage)
+
+        elif not confirmation:
+            errormessage = "You haven't confirm your new password"
+            return render_template("account.html", errormessage=errormessage)
 
         # Fetch user data
         rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
 
         # Password check
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("current_password")):
-            return apology("invalid password", 403)
+            errormessage = "Invalid password"
+            return render_template("account.html", errormessage=errormessage)
 
          # Personal touch password validator
         elif validate(new_password) != 1:
-            return apology("Password is weak, 8 characters with digits, uppercase and lowercase required")
+            errormessage = "Password is weak, 8 characters with digits, uppercase and lowercase required"
+            return render_template("account.html", errormessage=errormessage)
 
         elif not confirmation:
-            return apology("New password do not match")
+            errormessage = "New password do not match"
+            return render_template("account.html", errormessage=errormessage)
 
         elif new_password != confirmation:
-            return apology("New passwword do not match")
+            errormessage = "New password do not match"
+            return render_template("account.html", errormessage=errormessage)
 
         # Hash the new password
         else:
@@ -122,8 +135,10 @@ def account():
 
             db.execute("UPDATE users SET hash = ? WHERE id = ?", hash, session["user_id"])
 
-            flash("Success!")
-            return render_template("index.html")
+            flash("Success! Log in with your new credential")
+
+            # Redirect user to login form
+            return redirect("/login")
 
     else:
         return render_template("account.html")
