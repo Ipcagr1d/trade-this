@@ -1,1 +1,8 @@
+# Ignore python virtual enviroment
 .venv/
+
+# Ignore pycache
+.__pycache__/
+
+# Ignore Api key variable
+.env
