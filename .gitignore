@@ -2,7 +2,7 @@
 .venv/
 
 # Ignore pycache
-.__pycache__/
+__pycache__/
 
 # Ignore Api key variable
 .env
