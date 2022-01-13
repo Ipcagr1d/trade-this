@@ -16,7 +16,7 @@ Serves as fulfillment of web development class in college and as a training grou
 
 ## MVP Is Now Available
 
-trade-this.herokuapp.com
+[Take a look!](https://trade-this.herokuapp.com/welcome) or go directly to trade-this.herokuapp.com/welcome
 
 ## Usage
 
