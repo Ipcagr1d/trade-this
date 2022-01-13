@@ -5,6 +5,8 @@ This website lets you <b>do actual trading with no money and risk. </b>Acts as a
 
 Serves as fulfillment of web development class in college and as a training ground for HTML, CSS, JS and flask microframework
 
+![Trade This! Overview GIF](https://github.com/Ipcagr1d/trade-this/blob/main/tradethis-gif.gif)
+
 ## Features
 
 - Essential website features built from ground up, account management system (to a lesser degree; include login, register, password change) <em>Because of this please don't use ANY IMPORTANT DATA</em>
